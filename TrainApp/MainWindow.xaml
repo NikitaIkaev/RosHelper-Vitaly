@@ -1,0 +1,609 @@
+﻿<Window x:Class="TrainApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrainApp"
+        mc:Ignorable="d"
+        Height="600" 
+        Width="800"
+        ResizeMode="NoResize"
+        Topmost="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"      
+        Title="RosHelper">
+
+    <Window.Resources>
+
+        <!--// Ссылка //-->
+
+        <ImageBrush x:Key="tb_mouse_over"
+                    ImageSource="Assets/hamburger.png"/>
+
+        <!--// Стили текстовых блоков //-->
+
+        <Style x:Key="font_style" TargetType="TextBlock">
+
+            <Setter Property="FontFamily"
+                    Value="Fonts/Roboto-Light.ttf #Roboto"/>
+
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+
+            <Setter Property="HorizontalAlignment"
+                    Value="Left"/>
+
+            <Setter Property="Foreground"
+                    Value="White"/>
+
+            <Setter Property="FontSize"
+                    Value="20"/>
+
+        </Style>
+
+        <!--// Стили подсказок //-->
+
+        <!--<Style TargetType="ToolTip" x:Key="tt_style">
+
+            <Setter Property="Placement" Value="Right"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="Background" Value="#4A5668"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+        </Style>-->
+
+        <!--// Стиль закрытия приложения//-->
+
+        <ImageBrush x:Key="CloseBtn_MouseOver" ImageSource="Assets/exitFocus.png"/>
+        <ImageBrush x:Key="HideBtn_MouseOver" ImageSource="Assets/hideFocus.png"/>
+
+        <Style x:Key="Close_btn" TargetType="{x:Type Button}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Border x:Name="button"
+                                BorderThickness="0"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+
+                                <Setter Property="Background"
+                                        TargetName="button"
+                                        Value="{StaticResource CloseBtn_MouseOver}"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+        <Style x:Key="Hide_btn" TargetType="{x:Type Button}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Border x:Name="button"
+                                BorderThickness="0"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+
+                                <Setter Property="Background"
+                                        TargetName="button"
+                                        Value="{StaticResource HideBtn_MouseOver}"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+
+        <!--// Стиль вкладок меню //-->
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+
+                        <Border  x:Name="border"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 Background="{TemplateBinding Background}"
+                                 SnapsToDevicePixels="True">
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="true">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="true">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="Assets/back.jpg"/>
+            </Grid.Background>
+
+        </Grid>
+
+        <!--// Разметка закрытия приложения //-->
+
+        <Grid Grid.ColumnSpan="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="CloseBtn"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Height="40"
+                        Width="40"
+                        Margin="0 -50 -50 0"
+                        BorderThickness="0"
+                        Style="{StaticResource Close_btn}" Click="CloseBtn_Click">
+
+                <Button.Background>
+
+                    <ImageBrush ImageSource="Assets/exit.png"/>
+
+                </Button.Background>
+
+            </Button>
+
+            <Button x:Name="HideBtn"
+                        Height="40"
+                        Width="40"
+                        Margin="687,15,43,35"
+                        BorderThickness="0"
+                        Style="{StaticResource Hide_btn}" Click="HideBtn_Click" Grid.ColumnSpan="2" Grid.RowSpan="2">
+
+                <Button.Background>
+
+                    <ImageBrush ImageSource="Assets/hide.png"/>
+
+                </Button.Background>
+
+            </Button>
+
+            <TextBlock Grid.Column="0" Grid.Row="1" x:Name="header" HorizontalAlignment="Left" FontSize="30" Margin="90 10 0 0">
+
+            </TextBlock>
+
+        </Grid>
+
+
+        <!--// Боковое меню //-->
+
+        <Grid Grid.Column="0"   
+              x:Name="nav_pnl"                    
+              HorizontalAlignment="Left"
+              Width="65"     
+              Background="#FF757E8B"
+              Panel.ZIndex="2">
+
+
+            <StackPanel x:Name="st_pnl">
+
+                <!--// Заголовок меню //-->
+
+                <Grid Height="90">
+
+                    <!--// Надпись //-->
+
+                    <TextBlock  Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="73,-20,0,0"
+                                    Text="Меню"
+                                    Foreground="White"
+                                    FontSize="22"
+                                    Background="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource font_style}">
+                            
+                            <!--// Затенение //-->
+
+                        <TextBlock.Effect>
+
+                            <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="White"/>
+
+                        </TextBlock.Effect>
+
+                    </TextBlock>
+
+                    <!--// Гамбургер //-->
+
+                    <ToggleButton x:Name="Tg_Btn"
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="18,-20,0,0"
+                                      Height="30"
+                                      Width="30"
+                                      BorderThickness="0"
+                                      Style="{StaticResource tb_style}">
+
+                        <!--// Иконка гамбургера //-->
+
+                        <ToggleButton.Background>
+
+                            <ImageBrush ImageSource="Assets/hamburger.png"/>
+
+                        </ToggleButton.Background>
+
+                        <!--// Скрытие и раскрытие гамбургера //-->
+
+                        <ToggleButton.Triggers>
+
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+
+                                <BeginStoryboard>
+
+                                    <Storyboard x:Name="HideStackPanel">
+
+                                        <DoubleAnimation    
+                                                
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="230" To="65"
+                                                Duration="0:0:0.2">
+
+                                        </DoubleAnimation>
+
+                                    </Storyboard>
+
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                                <BeginStoryboard>
+
+                                    <Storyboard x:Name="ShowStackPanel">
+
+                                        <DoubleAnimation
+                                                
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="65" To="230"
+                                                Duration="0:0:0.3">
+
+                                        </DoubleAnimation>
+
+                                    </Storyboard>
+
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+
+                        </ToggleButton.Triggers>
+
+
+                    </ToggleButton>
+
+                </Grid>
+
+                <!--// Список с вкладками //-->
+
+                <ListView  x:Name="LV"
+                           Background="Transparent"
+                           BorderBrush="Transparent"
+                           ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                    <!--// Домашняя страница //-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                                  Margin="0,0,0,15"
+                                  Selected="ListViewItem_Selected"
+                                  Name="home"
+                                      >
+
+                        <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                            <Image Source="Assets/home.png"
+                                       Stretch="Fill"
+                                       Margin="5,0,0,0" Width="40" Height="40"/>
+
+                            <TextBlock Text="Главная"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+
+
+                    </ListViewItem>
+
+                    <!--// Чат 1 на 1 //-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                                  Margin="0,0,0,15" 
+                                  Selected="ListViewItem_Selected"
+                                  Name="chatonetoone"
+                                      >
+
+                        <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                            <Image Source="Assets/chatonetoone.png"
+                                       Stretch="Fill"
+                                       Margin="5,0,0,0" Width="40" Height="40"
+                                       
+                                   />
+
+                            <TextBlock Text="Связаться"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+
+
+                    </ListViewItem>
+
+                    <!--// Общий чат //-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" 
+                                      Selected="ListViewItem_Selected"
+                                      Name="chatmany"
+                                      >
+
+                        <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                            <Image Source="Assets/need.png"
+                                       Stretch="Fill"
+                                       Margin="5,0,0,0" Width="40" Height="40"/>
+
+                            <TextBlock Text="Общие материалы"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+
+                    </ListViewItem>
+
+                    <!--// Пользователь //-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" 
+                                      Selected="ListViewItem_Selected"
+                                      Name="user"
+                                      >
+
+                        <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                            <Image Source="Assets/user.png"
+                                       Stretch="Fill"
+                                       Margin="5,0,0,0" Width="40" Height="40"/>
+
+                            <TextBlock Text="Пользователь"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+
+
+                    </ListViewItem>
+
+                    <!--// Задачи //-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15"
+                                      Selected="ListViewItem_Selected"
+                                      Name="tasks"
+                                      >
+
+                        <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                            <Image Source="Assets/tasks.png"
+                                       Stretch="Fill"
+                                       Margin="5,0,0,0" Width="40" Height="40"/>
+
+                            <TextBlock Text="Задачи"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+
+
+                    </ListViewItem>
+
+                    <!--// Настройки //-->
+
+                    <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" 
+                                      Selected="ListViewItem_Selected"
+                                      Name="settings"
+                                      >
+
+                        <StackPanel Orientation="Horizontal"
+                                        Width="230">
+
+                            <Image Source="Assets/settings.png"
+                                       Stretch="Fill"
+                                       Margin="5,0,0,0" Width="40" Height="40"/>
+
+                            <TextBlock Text="Настройки"
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+
+
+                    </ListViewItem>
+
+
+
+                    <!--// Стили для элементов ListView //-->
+
+                    <ListView.ItemContainerStyle>
+
+                        <Style TargetType="ListViewItem">
+
+                            <Setter Property="Template">
+
+                                <Setter.Value>
+
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                        <Border x:Name="Bd"
+                                                    Height="50"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="True">
+
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                        </Border>
+
+                                        <ControlTemplate.Triggers>
+
+                                            <MultiTrigger>
+
+                                                <MultiTrigger.Conditions>
+
+                                                    <Condition Property="IsMouseOver" Value="True"/>
+
+                                                </MultiTrigger.Conditions>
+
+                                                <Setter Property="Background"
+                                                            TargetName="Bd"
+                                                            Value="#FF828D99"/>
+
+                                                <Setter Property="BorderBrush"
+                                                            TargetName="Bd"
+                                                            Value="#FF58616A"/>
+
+                                            </MultiTrigger>
+
+                                        </ControlTemplate.Triggers>
+
+                                    </ControlTemplate>
+
+                                </Setter.Value>
+
+                            </Setter>
+
+                        </Style>
+
+                    </ListView.ItemContainerStyle>
+
+                </ListView>
+
+
+            </StackPanel>
+
+
+        </Grid>
+        <!--// Страница содержимого //-->
+        <Frame NavigationUIVisibility="hidden"
+               Opacity="{Binding FrameOpacity}"
+               Name="mainFrame" HorizontalAlignment="Right" 
+               Width="735" Margin="0,83,0,0" Panel.ZIndex="1"/>
+    </Grid>
+
+
+</Window>
